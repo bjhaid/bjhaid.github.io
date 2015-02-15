@@ -17,7 +17,7 @@ CREATE TABLE foos (
 );
 {% endhighlight %}
 
-Then you write an insert query to confirm the default behaves correctly:
+We write an insert query to confirm the test default [uuid](http://en.wikipedia.org/wiki/Universally_unique_identifier) generation behaves correctly:
 
 {% highlight sql %}
 insert into foos(name) values('bar');
@@ -32,7 +32,7 @@ soro=# select * from foos;
   1 | bar  | 10cbf8ac-fbd6-45d8-918e-e913b9dbe2ca
 {% endhighlight %}
 
-Excited you start writing the client code via your ORM of choice(`ecto` for example) and find the below:
+Excited this works we start writing the client code via our ORM of choice([`ecto`](https://github.com/elixir-lang/ecto) for example) and find the below:
 
 {% highlight sql %}
 foo = Foo.Repo.insert(%Foo{name: "foo"})
@@ -55,7 +55,7 @@ foo.name #=> "doe"
 foo.ref_id #=> "8C98BF51-2B4F-4AC6-A254-378A6666BB9C"
 {% endhighlight %}
 
-- Alternatively we can write a database trigger that overrides null and sets it to a `uuid` as expected, e.g:
+- Write a database trigger that overrides `ref_id` if it is `null` and sets it to a `uuid` as expected, e.g:
 
 {% highlight sql %}
 CREATE OR REPLACE FUNCTION update_ref_id() RETURNS trigger AS $$
@@ -85,9 +85,9 @@ foo.ref_id #=> "10cbf8ac-fbd6-45d8-918e-e913b9dbe2ca"
 
 Boom! now our client code behaves just as expected.  
 &nbsp;  
-The above solution works with `ref_id` being `NOT NULL`  
+The solutions would work with `ref_id` being `NOT NULL`  
 &nbsp;  
 Thanks for reading!
 &nbsp;  
 &nbsp;  
-PS The queries above are all postgres specific but the idea should work across databases that comply with the sql standard.
+PS: The queries above are all postgres specific but the idea should work across databases that comply with the sql standard.
