@@ -61,10 +61,10 @@ foo.ref_id #=> "8C98BF51-2B4F-4AC6-A254-378A6666BB9C"
 CREATE OR REPLACE FUNCTION update_ref_id() RETURNS trigger AS $$
 DECLARE
 BEGIN
-IF NEW.ref_id IS NULL THEN
-  NEW.ref_id = uuid_generate_v4();
-END IF;
-RETURN NEW;
+  IF NEW.ref_id IS NULL THEN
+    NEW.ref_id = uuid_generate_v4();
+  END IF;
+  RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
@@ -88,3 +88,6 @@ Boom! now our client code behaves just as expected.
 The above solution works with `ref_id` being `NOT NULL`  
 &nbsp;  
 Thanks for reading!
+&nbsp;  
+&nbsp;  
+PS The queries above are all postgres specific but the idea should work across databases that comply with the sql standard.
