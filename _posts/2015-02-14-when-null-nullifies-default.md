@@ -83,9 +83,8 @@ foo.name #=> "Bob"
 foo.ref_id #=> "10cbf8ac-fbd6-45d8-918e-e913b9dbe2ca"
 {% endhighlight %}
 
-Boom! now our client code behaves just as expected.
-
-The above solution works with `ref_id` being `NOT NULL`
-
-
+Boom! now our client code behaves just as expected.  
+&nbsp;  
+The above solution works with `ref_id` being `NOT NULL`  
+&nbsp;  
 Thanks for reading!
