@@ -21,6 +21,7 @@ factorial(_) -> error.
 {% endhighlight %}
 
 {% highlight erlang %}
+
              .
                       .
 
