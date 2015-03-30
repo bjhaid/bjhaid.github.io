@@ -20,7 +20,7 @@ It is:
 This post intends to explore how to integrate with Kafka from Elixir, the post assumes you have some knowledge of Elixir if not checkout the [Elixir getting started](http://elixir-lang.org/getting-started/introduction.html).
 
 ### Setting up Kafka
-We would set up Kafka from docker images (for production use consider http://kafka.apache.org/documentation.html#quickstart) using [fig](http://www.fig.sh/install.html)
+We would set up Kafka from docker images (for production use consider [http://kafka.apache.org/documentation.html#quickstart](http://kafka.apache.org/documentation.html#quickstart)) using [fig](http://www.fig.sh/install.html)
 
 {% highlight bash %}
 $ git clone git@github.com:bjhaid/kafka_docker.git
