@@ -4,7 +4,7 @@ title: Kafka meets Elixir
 excerpt: Exploring how to integrate with Kafka from Elixir.
 modified: 2015-03-28
 tags: [elixir, kafka]
-comments: false
+comments: true
 ---
 
 [Apache Kafka](http://kafka.apache.org/) is a high-throughput distributed messaging system.  
