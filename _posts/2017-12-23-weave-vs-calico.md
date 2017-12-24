@@ -129,9 +129,11 @@ cluster with respect to the node while you are debugging.
 
 #### Calico
 
-Standard tooling that linux/network administrators are used to just work out of
-the box. Calico continuously attempts to keep the state of iptables
-synchronized with it's assumed internal state (a similar behavior to
+Debugging packet traversal with tools like `traceroute` should indicate the
+node the packet passed through before getting to the destination pod.
+Introspecting routes installed can be done using the iproute2 utility e.g: `ip
+ro sh proto bird table all`. Calico continuously attempts to keep the state of
+iptables synchronized with it's assumed internal state (a similar behavior to
 kube-proxy) which could be frustrating when you are attempting to debug and it
 installs it's rules first so you can't easily log Information about the
 iptables chains a packet traverses in order to debug iptables related problems.
@@ -145,3 +147,12 @@ any form of encryption.
 
 They both support ingress and egress Network Policies, Calico being the
 pioneer.
+
+### Capacity
+
+By default Calico and Weave are both full meshes so they both begin to degrade
+once the cluster reaches a certain size (about 100 nodes). They both have
+support for reducing the full mesh problem, Weave via [multi-hop
+switching](https://www.weave.works/docs/net/latest/tasks/manage/multi-cloud-multi-hop/)
+and Calico via [route
+reflection](https://docs.projectcalico.org/v2.6/usage/routereflector/calico-routereflector).
