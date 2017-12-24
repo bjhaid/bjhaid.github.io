@@ -30,14 +30,15 @@ cluster you use for Kubernetes or you want to set up an entirely different etcd
 cluster for Calico. Once you download the [calico
 configs](https://docs.projectcalico.org/v2.6/getting-started/kubernetes/installation/hosted/calico.yaml)
 you can modify the `etcd_endpoints` as described in the [official
-docs](https://docs.projectcalico.org/v2.6/getting-started/kubernetes/installation/hosted/hosted).
+docs](https://docs.projectcalico.org/v2.6/getting-started/kubernetes/installation/hosted/hosted)
+and then `kubectl apply calico_config` to install Calico.
 
 ### Protocol
 
 #### Weave
 
 Weave operates at layer 2 of the OSI layer and uses the VXLAN protocol to
-overlay a layer 2 network on an existing network, Weave uses open vswitch
+overlay a layer 2 network on an existing network, Weave uses Open Vswitch
 kernel module to program the kernels FDB. Weave only requires port 6783 (TCP
 and UDP) and port 6784 (UDP) open on the nodes that need to participate in the
 overlay network. Pods on the overlay network can then transparently communicate
@@ -46,7 +47,7 @@ with each other like they were all plugged into the same switch.
 #### Calico
 
 Calico operates at layer 3 of the OSI layer, it uses the BGP protocol to share
-route information among the nodes participating in the network which each of
+route information among the nodes participating in the network with each of
 the node acting as a gateway to the pods running on them. Calico requires port
 179 (TCP) open. Calico makes each of the node proxy_arp to the pods running on
 each of them and installs a default gateway `169.254.1.1` on each of the pod,
@@ -78,7 +79,7 @@ $ ip link sh cali23b602f82b4
 
 Weave uses a CRDT to fairly distribute IP addresses among nodes, it is well
 documented
-[here](https://github.com/weaveworks/weave/blob/master/docs/ipam.md), so I'll
+[here](https://github.com/weaveworks/weave/blob/master/docs/ipam.md), so I will
 not rehash it.
 
 #### Calico
@@ -97,9 +98,8 @@ other nodes completely run out of IP address blocks.
 
 #### Weave
 
-Since Weave sets up an overlay, irrespective the network topology so far the
-nodes participating in the cluster can reach each on the other on port 6783
-(UDP and TCP) and port 6784 (UDP), the overlay will just work.
+So far the nodes participating in the cluster can reach each other on port 6783
+(UDP and TCP) and port 6784 (UDP) the overlay will just work.
 
 #### Calico
 
@@ -117,14 +117,15 @@ firewall.
 Debugging packet traversal with tools like `traceroute` does not reflect nodes
 the packet passed through before getting to the final pod, since the pod
 assumes direct connectivity. To introspect information programmed in the kernel
-you will have to use tools like [odp](https://github.com/weaveworks/go-odp).
-Debugging an overlay network requires a different thought process from what
-most linux/network administrators are used to since you have to be cognizant of
-the fact that layer 2 becomes layer 3 and layer 3 becomes layer 2 when a packet
-goes from a pod on one node to a pod on another node. Weave programs iptables
-only when there are changes in the cluster, so you can modify the rules for
-debugging purposes and be guaranteed they'll stay same if nothing changes in
-the cluster with respect to the node while you are debugging.
+with Open Vswitch you will have to use tools like
+[odp](https://github.com/weaveworks/go-odp).  Debugging an overlay network
+requires a different thought process from what most linux/network
+administrators are used to since you have to be cognizant of the fact that
+layer 2 becomes layer 3 and layer 3 becomes layer 2 when a packet goes from a
+pod on one node to a pod on another node. Weave programs iptables only when
+there are changes in the cluster, so you can modify the rules for debugging
+purposes and be guaranteed they will stay same if nothing changes in the
+cluster with respect to the node while you are debugging.
 
 #### Calico
 
@@ -132,8 +133,8 @@ Standard tooling that linux/network administrators are used to just work out of
 the box. Calico continuously attempts to keep the state of iptables
 synchronized with it's assumed internal state (a similar behavior to
 kube-proxy) which could be frustrating when you are attempting to debug and it
-installs it's rules first so you can't easily LOG which chains packets are
-traversing to debug iptables related problems.
+installs it's rules first so you can't easily log Information about the
+iptables chains a packet traverses in order to debug iptables related problems.
 
 ### Encryption
 
