@@ -4,6 +4,8 @@ GEM
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
     colorator (1.1.0)
+    faraday (0.13.1)
+      multipart-post (>= 1.2, < 3)
     ffi (1.9.18)
     ffi (1.9.18-x64-mingw32)
     ffi (1.9.18-x86-mingw32)
@@ -19,6 +21,8 @@ GEM
       pathutil (~> 0.9)
       rouge (>= 1.7, < 3)
       safe_yaml (~> 1.0)
+    jekyll-gist (1.5.0)
+      octokit (~> 4.2)
     jekyll-sass-converter (1.5.1)
       sass (~> 3.4)
     jekyll-sitemap (1.1.1)
@@ -32,6 +36,9 @@ GEM
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
     mercenary (0.3.6)
+    multipart-post (2.0.0)
+    octokit (4.8.0)
+      sawyer (~> 0.8.0, >= 0.5.3)
     octopress (3.0.12.pre.1)
       jekyll (>= 2.0)
       mercenary (~> 0.3.2)
@@ -61,6 +68,9 @@ GEM
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
+    sawyer (0.8.1)
+      addressable (>= 2.3.5, < 2.6)
+      faraday (~> 0.8, < 1.0)
     titlecase (0.1.1)
 
 PLATFORMS
@@ -70,6 +80,7 @@ PLATFORMS
 
 DEPENDENCIES
   jekyll
+  jekyll-gist
   jekyll-sitemap
   octopress (~> 3.0.0.rc.12)
 
