@@ -2,7 +2,7 @@
 layout: post
 title: Weave vs Calico
 #excerpt:
-modified: 2017-12-23
+modified: 2017-12-25
 tags: [kubernetes, calico, weave, cni, networking, containers]
 comments: true
 ---
