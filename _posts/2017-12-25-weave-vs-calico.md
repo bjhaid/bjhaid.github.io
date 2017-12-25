@@ -9,10 +9,11 @@ comments: true
 
 Making a choice on a
 [CNI](https://github.com/containernetworking/cni#cni---the-container-network-interface)
-to use in production is not always easy and replacing a CNI after the fact is
-also not an easy task. Weave and Calico are one of the most popular CNIs out
-there and I have been lucky to run both of them in production, in this post
-I'll attempt to provide a non-bias review of both CNI implementations.
+(Container Network Interface, necessary for pod to pod communication) to use in
+production is not always easy and replacing a CNI after the fact is also not an
+easy task. Weave and Calico are one of the most popular CNIs out there and I
+have been lucky to run both of them in production, in this post I'll attempt to
+provide a non-bias review of both CNI implementations.
 
 ### Installation
 
@@ -39,13 +40,15 @@ and then `kubectl apply calico_config` to install Calico.
 #### Weave
 
 Weave operates at layer 2 of the OSI layer and uses the VXLAN protocol to
-overlay a layer 2 network on an existing network, Weave uses Open vSwitch
-kernel module to program the kernels FDB. Weave only requires port 6783 (TCP
-and UDP) and port 6784 (UDP) open on the nodes that need to participate in the
-overlay network. Pods on the overlay network can then transparently communicate
-with each other like they were all plugged into the same switch.
+overlay a layer 2 network on an existing network, Weave uses the Open vSwitch
+kernel module to program the kernel's
+[FDB](https://en.wikipedia.org/wiki/Forwarding_information_base) (Forwarding
+Database). Weave only requires port 6783 (TCP and UDP) and port 6784 (UDP) open
+on the nodes that need to participate in the overlay network. Pods on the
+overlay network can then transparently communicate with each other like they
+were all plugged into the same switch.
 
-The VXLAN is a relatively new protocol; the VXLAN RFC ([RFC
+VXLAN is a relatively new protocol; the VXLAN RFC ([RFC
 7348](https://tools.ietf.org/html/rfc7348)) was published in August 2014.
 
 #### Calico
@@ -132,7 +135,7 @@ administrators are used to since you have to be cognizant of the fact that
 layer 2 becomes layer 3 and layer 3 becomes layer 2 when a packet goes from a
 pod on one node to a pod on another node. Weave programs iptables only when
 there are changes in the cluster, so you can modify the rules for debugging
-purposes and be guaranteed they will stay same if nothing changes in the
+purposes and be guaranteed they will stay the same if nothing changes in the
 cluster with respect to the node while you are debugging.
 
 #### Calico
