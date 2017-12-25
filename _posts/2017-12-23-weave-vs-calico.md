@@ -7,11 +7,12 @@ tags: [kubernetes, calico, weave, cni, networking, containers]
 comments: true
 ---
 
-Making a choice on a CNI to use in production is not always easy and replacing
-a CNI after the fact is also not an easy task. Weave and Calico are one of the
-most popular CNIs out there and I have been lucky to run both of them in
-production, in this post I'll attempt to provide a non-bias review of both CNI
-implementations.
+Making a choice on a
+[CNI](https://github.com/containernetworking/cni#cni---the-container-network-interface)
+to use in production is not always easy and replacing a CNI after the fact is
+also not an easy task. Weave and Calico are one of the most popular CNIs out
+there and I have been lucky to run both of them in production, in this post
+I'll attempt to provide a non-bias review of both CNI implementations.
 
 ### Installation
 
@@ -25,9 +26,9 @@ $ kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl vers
 
 #### Calico
 Installing Calico is more involved since it requires an etcd v2
-cluster to function, you have to make a decision if you intend using the same
-cluster you use for Kubernetes or you want to set up an entirely different etcd
-cluster for Calico. Once you download the [calico
+cluster to function, you have to make a decision if you intend on using the
+same cluster you use for Kubernetes or you want to set up an entirely different
+etcd cluster for Calico. Once you download the [calico
 configs](https://docs.projectcalico.org/v2.6/getting-started/kubernetes/installation/hosted/calico.yaml)
 you can modify the `etcd_endpoints` as described in the [official
 docs](https://docs.projectcalico.org/v2.6/getting-started/kubernetes/installation/hosted/hosted)
@@ -38,13 +39,13 @@ and then `kubectl apply calico_config` to install Calico.
 #### Weave
 
 Weave operates at layer 2 of the OSI layer and uses the VXLAN protocol to
-overlay a layer 2 network on an existing network, Weave uses Open Vswitch
+overlay a layer 2 network on an existing network, Weave uses Open vSwitch
 kernel module to program the kernels FDB. Weave only requires port 6783 (TCP
 and UDP) and port 6784 (UDP) open on the nodes that need to participate in the
 overlay network. Pods on the overlay network can then transparently communicate
 with each other like they were all plugged into the same switch.
 
-The VXLAN is a relatively new protocol, the VXLAN RFC ([RFC
+The VXLAN is a relatively new protocol; the VXLAN RFC ([RFC
 7348](https://tools.ietf.org/html/rfc7348)) was published in August 2014.
 
 #### Calico
@@ -53,7 +54,7 @@ Calico operates at layer 3 of the OSI layer, it uses the BGP protocol to share
 route information among the nodes participating in the network with each of
 the node acting as a gateway to the pods running on them. Calico requires port
 179 (TCP) open. Calico makes each of the node proxy_arp to the pods running on
-each of them and installs a default gateway `169.254.1.1` on each of the pod,
+each of them and installs a default gateway `169.254.1.1` on each of the pods,
 e.g:
 
 {% highlight bash %}
@@ -78,7 +79,7 @@ $ ip link sh cali23b602f82b4
 
 The BGP Protocol has been around for a while, the earliest RFC ([RFC
 1654](https://tools.ietf.org/html/rfc1654)) for BGP was written in July 1994.
-The BGP protocol also powers a significant portion of the internet.
+The BGP protocol powers a significant portion of the internet.
 
 ### IPAM (IP Address Management)
 
@@ -105,8 +106,8 @@ other nodes completely run out of IP address blocks.
 
 #### Weave
 
-So far the nodes participating in the cluster can reach each other on port 6783
-(UDP and TCP) and port 6784 (UDP) the overlay will just work.
+As long as the nodes participating in the cluster can reach each other on port
+6783 (UDP and TCP) and port 6784 (UDP) the overlay will just work.
 
 #### Calico
 
@@ -124,7 +125,7 @@ firewall.
 Debugging packet traversal with tools like `traceroute` does not reflect nodes
 the packet passed through before getting to the final pod, since the pod
 assumes direct connectivity. To introspect information programmed in the kernel
-with Open Vswitch you will have to use tools like
+with Open vSwitch you will have to use tools like
 [odp](https://github.com/weaveworks/go-odp).  Debugging an overlay network
 requires a different thought process from what most linux/network
 administrators are used to since you have to be cognizant of the fact that
@@ -140,14 +141,14 @@ Debugging packet traversal with tools like `traceroute` should indicate the
 node the packet passed through before getting to the destination pod.
 Introspecting routes installed can be done using the iproute2 utility e.g: `ip
 ro sh proto bird table all`. Calico continuously attempts to keep the state of
-iptables synchronized with it's assumed internal state (a similar behavior to
+iptables synchronized with its assumed internal state (a similar behavior to
 kube-proxy) which could be frustrating when you are attempting to debug and it
-installs it's rules first so you can't easily log Information about the
+installs its rules first so you can't easily log Information about the
 iptables chains a packet traverses in order to debug iptables related problems.
 
 ### Encryption
 
-Weave out of the box supports IPsec encryption while Calico does not support
+Weave supports IPsec encryption out of the box while Calico does not support
 any form of encryption.
 
 ### Network Policy
