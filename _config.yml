@@ -16,6 +16,8 @@ sass:
 plugins:
   - jekyll-sitemap
   - jekyll-gist
+  - jekyll/tagging
+  - jekyll-tagging-related_posts
 
 kramdown:
   auto_ids: true

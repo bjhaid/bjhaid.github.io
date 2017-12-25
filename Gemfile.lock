@@ -27,6 +27,11 @@ GEM
       sass (~> 3.4)
     jekyll-sitemap (1.1.1)
       jekyll (~> 3.3)
+    jekyll-tagging (1.1.0)
+      nuggets
+    jekyll-tagging-related_posts (1.0.0)
+      jekyll (~> 3.0)
+      jekyll-tagging (~> 1.0)
     jekyll-watch (1.5.1)
       listen (~> 3.0)
     kramdown (1.16.2)
@@ -37,6 +42,7 @@ GEM
       ruby_dep (~> 1.2)
     mercenary (0.3.6)
     multipart-post (2.0.0)
+    nuggets (1.5.0)
     octokit (4.8.0)
       sawyer (~> 0.8.0, >= 0.5.3)
     octopress (3.0.12.pre.1)
@@ -82,6 +88,7 @@ DEPENDENCIES
   jekyll
   jekyll-gist
   jekyll-sitemap
+  jekyll-tagging-related_posts
   octopress (~> 3.0.0.rc.12)
 
 BUNDLED WITH
