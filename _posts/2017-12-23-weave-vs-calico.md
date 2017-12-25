@@ -44,6 +44,9 @@ and UDP) and port 6784 (UDP) open on the nodes that need to participate in the
 overlay network. Pods on the overlay network can then transparently communicate
 with each other like they were all plugged into the same switch.
 
+The VXLAN is a relatively new protocol, the VXLAN RFC ([RFC
+7348](https://tools.ietf.org/html/rfc7348)) was published in August 2014.
+
 #### Calico
 
 Calico operates at layer 3 of the OSI layer, it uses the BGP protocol to share
@@ -72,6 +75,10 @@ $ ip link sh cali23b602f82b4
 29: cali23b602f82b4@docker0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP mode DEFAULT group default 
     link/ether fa:1a:23:4c:0a:c0 brd ff:ff:ff:ff:ff:ff
 {% endhighlight %}
+
+The BGP Protocol has been around for a while, the earliest RFC ([RFC
+1654](https://tools.ietf.org/html/rfc1654)) for BGP was written in July 1994.
+The BGP protocol also powers a significant portion of the internet.
 
 ### IPAM (IP Address Management)
 
