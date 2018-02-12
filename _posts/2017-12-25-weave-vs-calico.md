@@ -2,7 +2,7 @@
 layout: post
 title: Weave vs Calico
 excerpt: Making a choice on a CNI (Container Network Interface, necessary for pod to pod communication) to use in production is not always easy and replacing a CNI after the fact is also not an easy task. Weave and Calico are one of the most popular CNIs out there and I have been lucky to run both of them in production, in this post I'll attempt to provide a non-bias review of both CNI implementations.
-modified: 2017-12-25
+modified: 2018-02-11
 tags: [kubernetes, calico, weave, cni, networking, containers]
 comments: true
 ---
@@ -101,9 +101,12 @@ needs to run `calicoctl delete node <nodeName>` when an instance is being
 deleted or come up with tricks to ensure the nodename is consistent across
 recreation, otherwise the entire pod cidr can be easily depleted. Weave had a
 similar problem but it has been fixed in this
-[PR](https://github.com/weaveworks/weave/pull/3022). Assigning a `/26` can lead
-to IP address fragmentation where some nodes still have free IP addresses but
-other nodes completely run out of IP address blocks.
+[PR](https://github.com/weaveworks/weave/pull/3022). ~~Assigning a `/26` can
+lead to IP address fragmentation where some nodes still have free IP addresses
+but other nodes completely run out of IP address blocks~~ **UPDATE** Calico
+does not fragment IP address allocation, when the entire CIDR is exhausted and
+there is no `/26` to assign, it will attempt to steal `/32` addresses from the
+other `/26` blocks that have free IP address slots.
 
 ### Multi-Subnet Support
 
