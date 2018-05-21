@@ -2,7 +2,7 @@
 layout: post
 title: Weave vs Calico
 excerpt: Making a choice on a CNI (Container Network Interface, necessary for pod to pod communication) to use in production is not always easy and replacing a CNI after the fact is also not an easy task. Weave and Calico are one of the most popular CNIs out there and I have been lucky to run both of them in production, in this post I'll attempt to provide a non-bias review of both CNI implementations.
-modified: 2018-02-11
+modified: 2018-05-21
 tags: [kubernetes, calico, weave, cni, networking, containers]
 comments: true
 ---
@@ -159,8 +159,10 @@ any form of encryption.
 
 ### Network Policy
 
-They both support ingress and egress Network Policies, Calico being the
-pioneer.
+They both support ingress ~~and egress~~ Network Policy (Weave only supports
+ingress and has an [open
+issue](https://github.com/weaveworks/weave/issues/2624) on egress). Calico has
+support for both egress and ingress and is the pioneer.
 
 ### Capacity
 
