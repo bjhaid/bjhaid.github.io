@@ -41,9 +41,9 @@ Gave a talk about this at DevopsDays Chicago 2016
 
 ### What kind of value can I provide?
 
-While [I love to write software](https://github.com/bjhaid) and I **DO NOT**
-plan to write software during this period as I am not convinced that writing
-code will be the best use of my time and this arrangement, so find below ways I
+While [I love to write software](https://github.com/bjhaid), I **DO NOT** plan
+to write software during this period as I am not convinced that writing code
+will be the best use of my time and this arrangement, so find below ways I
 believe I can add value:
 
 - Help introduce and envagelize agile practices.
