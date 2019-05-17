@@ -49,12 +49,11 @@ Compiles!?
 ```
 
 it compiles, this is surprising!? The variable here is also declared but not
-used, it could be part of the public API of the package, or truly in this case
-unused. ~~(I have searched online and can not find an explanation for this
-behavior, if you know why please drop me a comment)~~. In my quest to reinforce
-opinions similar to that of golang, I found a cool tool
-[staticcheck](https://staticcheck.io/docs/) which will catch unused variables
-of this nature and does even much more.
+used (I have searched online and can not find an explanation for this behavior,
+if you know why please drop me a comment). In my quest to reinforce opinions
+similar to that of golang, I found a cool tool
+[staticcheck](https://staticcheck.io/docs/) which will catch unused variables of
+this nature and does even much more.
 
 ```bash
 $> staticcheck will_not_compile_file_scope.go
