@@ -1,5 +1,6 @@
 ---
 layout: post
+archived: true
 title: 2019 Sabbatical
 modified: 2019-01-03
 published: false

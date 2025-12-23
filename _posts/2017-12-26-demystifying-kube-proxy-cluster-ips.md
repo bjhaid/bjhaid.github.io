@@ -1,5 +1,6 @@
 ---
 layout: post
+archived: true
 title: Demystifying Kube Proxy (Cluster IPs)
 excerpt: Cluster IPs (sometimes referred to as service IPs) are usually described with the term "magic", in this post I will attempt to remove the magical veil on Cluster IPs explaining how kube-proxy creates them and how they work.
 modified: 2017-12-26

@@ -1,6 +1,6 @@
 # Site wide configuration
 
-title:            "1100001 1111001 1101111"
+title:            "01100001 01111001 01101111"
 locale:           en_US
 url:              "https://www.abeji.de"
 
@@ -38,7 +38,6 @@ owner:
   facebook: #username
   google:
     plus: #username
-    analytics: 'UA-58403075-1'
     verify:
     ad-client:
     ad-slot:

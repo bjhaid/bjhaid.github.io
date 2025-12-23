@@ -1,5 +1,6 @@
 ---
 layout: post
+archived: true
 title: Weave vs Calico
 excerpt: Making a choice on a CNI (Container Network Interface, necessary for pod to pod communication) to use in production is not always easy and replacing a CNI after the fact is also not an easy task. Weave and Calico are one of the most popular CNIs out there and I have been lucky to run both of them in production, in this post I'll attempt to provide a non-bias review of both CNI implementations.
 modified: 2018-05-21

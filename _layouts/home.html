@@ -13,7 +13,7 @@
 
 {% include _navigation.html %}
 
-{% if page.image.feature %}
+    {% if page.image.feature %}
   <div class="image-wrap">
   <img src=
     {% if page.image.feature contains 'http' %}
@@ -34,16 +34,21 @@
   </div>
   <div id="index">
     <h3><a href="{{ site.url}}/blog/">Recent Posts</a></h3>
-    {% for post in site.posts limit:5 %}
-    <article>
-      {% if post.link %}
-        <h2 class="link-post"><a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a> <a href="{{ post.link }}" target="_blank" title="{{ post.title }}"><i class="fa fa-link"></i></h2>
-      {% else %}
-        <h2><a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h2>
-        <p>{{ post.excerpt | strip_html | truncate: 160 }}</p>
-      {% endif %}
-    </article>
-    {% endfor %}
+    {% assign recent_posts = site.posts | where_exp: "post", "post.archived != true" %}
+    {% if recent_posts and recent_posts.size > 0 %}
+      {% for post in recent_posts limit:5 %}
+      <article>
+        {% if post.link %}
+          <h2 class="link-post"><a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a> <a href="{{ post.link }}" target="_blank" title="{{ post.title }}"><i class="fa fa-link"></i></h2>
+        {% else %}
+          <h2><a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h2>
+          <p>{{ post.excerpt | strip_html | truncate: 160 }}</p>
+        {% endif %}
+      </article>
+      {% endfor %}
+    {% else %}
+      <p>There are no recent posts; browse the <a href="{{ site.url }}/archive/">archive</a> for everything I've written.</p>
+    {% endif %}
   </div><!-- /#index -->
 </div><!-- /#main -->
 

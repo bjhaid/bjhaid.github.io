@@ -1,5 +1,6 @@
 ---
 layout: post
+archived: true
 title: Understanding the Erlang Syntax
 excerpt: In this post I would give a basic walk-through of the erlang syntax
 modified: 2015-01-31

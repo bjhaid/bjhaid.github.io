@@ -1,5 +1,6 @@
 ---
 layout: post
+archived: true
 title: When null nullifies default
 excerpt: What happens when clients insert `null` in a column that should take a default value
 modified: 2015-02-15

@@ -1,5 +1,6 @@
 ---
 layout: post
+archived: true
 title: Static Checking Go
 modified: 2019-05-10
 published: true
