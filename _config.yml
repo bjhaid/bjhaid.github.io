@@ -10,9 +10,6 @@ url:              "https://www.abeji.de"
 permalink:   /:categories/:title/
 markdown:    kramdown
 highlighter: rouge
-sass:
-  sass_dir: _sass
-  style: compressed
 plugins:
   - jekyll-sitemap
   - jekyll-gist
