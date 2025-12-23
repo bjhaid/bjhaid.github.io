@@ -1,3 +1,7 @@
+@use "variables" as *;
+@use "mixins" as *;
+@use "grid" as *;
+
 hr { 
 	display: block; 
 	margin: 1em 0; 

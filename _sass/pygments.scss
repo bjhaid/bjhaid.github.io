@@ -1,3 +1,7 @@
+@use "variables" as *;
+@use "mixins" as *;
+@use "sass:color" as color;
+
 .highlight {
 	background-color: #efefef;
 	font-family: $code-font;
@@ -10,7 +14,7 @@
 		margin: 0;
 		padding: 1em;
 	}
-	.lineno { padding-right: 24px; color: lighten(#333332,50);}
+		.lineno { padding-right: 24px; color: color.adjust(#333332, $lightness: 50%);}
 	.hll { background-color: #ffffcc }
 	.c { color: #999988; font-style: italic } /* Comment */
 	.err { color: #a61717; background-color: #e3d2d2 } /* Error */

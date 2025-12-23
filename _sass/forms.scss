@@ -1,3 +1,8 @@
+@use "variables" as *;
+@use "mixins" as *;
+@use "sass:math" as math;
+@use "sass:color" as color;
+
 btnform { 
 	margin: 0 0 5px 0;
 	fieldset { 
@@ -13,11 +18,11 @@ btnform {
 		padding: 0;
 		color: $textcolor;
 		border: 0;
-		border-bottom: 1px solid lighten($black, 80);
+		border-bottom: 1px solid color.adjust($black, $lightness: 80%);
 		white-space: normal; 
 	}
 	p {
-		margin-bottom: 5px / 2; 
+		margin-bottom: math.div(5px, 2); 
 	}
 	ul {
 		list-style-type: none; 
@@ -45,7 +50,7 @@ textarea {
 }
 label {
 	display: block;
-	margin-bottom: 10px / 8;
+	margin-bottom: math.div(10px, 8);
 	font-weight: bold;
 	color: $textcolor;
 	cursor: pointer; 
@@ -61,12 +66,12 @@ select {
 	display: inline-block;
 	width: 100%;
 	padding: 4px;
-	margin-bottom: 5px / 4;
+	margin-bottom: math.div(5px, 4);
 	background-color: $white;
-	border: 1px solid lighten($black, 80);
+	border: 1px solid color.adjust($black, $lightness: 80%);
 	color: $textcolor; 
 	&:hover {
-		border-color: lighten($accentcolor, 50); 
+		border-color: color.adjust($accentcolor, $lightness: 50%); 
 	}
 }
 .input-mini { 
@@ -184,7 +189,7 @@ select:focus {
 /* help text ==================================== */
 .help-block,
 .help-inline {
-	color : lighten($black, 50); 
+	color : color.adjust($black, $lightness: 50%); 
 }
 .help-block {
 	display : block; 
