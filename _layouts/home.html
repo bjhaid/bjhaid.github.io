@@ -12,6 +12,7 @@
 {% include _browser-upgrade.html %}
 
 {% include _navigation.html %}
+{% include archive-cutoff.html %}
 
     {% if page.image.feature %}
   <div class="image-wrap">
@@ -34,19 +35,29 @@
   </div>
   <div id="index">
     <h3><a href="{{ site.url}}/blog/">Recent Posts</a></h3>
-    {% assign recent_posts = site.posts | where_exp: "post", "post.archived != true" %}
-    {% if recent_posts and recent_posts.size > 0 %}
-      {% for post in recent_posts limit:5 %}
+    {% assign recent_count = 0 %}
+    {% for post in site.posts %}
+      {% if post.archived == true %}
+        {% continue %}
+      {% endif %}
+      {% assign post_timestamp = post.date | date: "%s" %}
+      {% if post_timestamp <= archive_cutoff %}
+        {% continue %}
+      {% endif %}
       <article>
         {% if post.link %}
-          <h2 class="link-post"><a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a> <a href="{{ post.link }}" target="_blank" title="{{ post.title }}"><i class="fa fa-link"></i></h2>
+          <h2 class="link-post"><a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a> <a href="{{ post.link }}" target="_blank" title="{{ post.title }}"><i class="fa fa-link"></i></a></h2>
         {% else %}
           <h2><a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h2>
           <p>{{ post.excerpt | strip_html | truncate: 160 }}</p>
         {% endif %}
       </article>
-      {% endfor %}
-    {% else %}
+      {% assign recent_count = recent_count | plus: 1 %}
+      {% if recent_count == 5 %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+    {% if recent_count == 0 %}
       <p>There are no recent posts; browse the <a href="{{ site.url }}/archive/">archive</a> for everything I've written.</p>
     {% endif %}
   </div><!-- /#index -->

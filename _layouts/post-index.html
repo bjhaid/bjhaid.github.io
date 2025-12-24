@@ -12,6 +12,7 @@
 {% include _browser-upgrade.html %}
 
 {% include _navigation.html %}
+{% include archive-cutoff.html %}
 
 {% if page.image.feature %}
   <div class="image-wrap">
@@ -34,25 +35,32 @@
   </div>
   <div id="index">
     <h1>{{ page.title }}</h1>
-    {% assign active_posts = site.posts | where_exp: "post", "post.archived != true" %}
-    {% if active_posts and active_posts.size > 0 %}
-      {% assign current_year = '' %}
-      {% for post in active_posts %}
-        {% assign post_year = post.date | date: '%Y' %}
-        {% if post_year != current_year %}
-          <h3>{{ post_year }}</h3>
-          {% assign current_year = post_year %}
+    {% assign active_found = false %}
+    {% assign current_year = '' %}
+    {% for post in site.posts %}
+      {% if post.archived == true %}
+        {% continue %}
+      {% endif %}
+      {% assign post_timestamp = post.date | date: "%s" %}
+      {% if post_timestamp <= archive_cutoff %}
+        {% continue %}
+      {% endif %}
+      {% assign active_found = true %}
+      {% assign post_year = post.date | date: '%Y' %}
+      {% if post_year != current_year %}
+        <h3>{{ post_year }}</h3>
+        {% assign current_year = post_year %}
+      {% endif %}
+      <article>
+        {% if post.link %}
+          <h2 class="link-post"><a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a> <a href="{{ post.link }}" target="_blank" title="{{ post.title }}"><i class="fa fa-link"></i></a></h2>
+        {% else %}
+          <h2><a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h2>
+          <p>{{ post.excerpt | strip_html | truncate: 160 }}</p>
         {% endif %}
-        <article>
-          {% if post.link %}
-            <h2 class="link-post"><a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a> <a href="{{ post.link }}" target="_blank" title="{{ post.title }}"><i class="fa fa-link"></i></a></h2>
-          {% else %}
-            <h2><a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h2>
-            <p>{{ post.excerpt | strip_html | truncate: 160 }}</p>
-          {% endif %}
-        </article>
-      {% endfor %}
-    {% else %}
+      </article>
+    {% endfor %}
+    {% if active_found == false %}
       <p>There are no current posts; visit the <a href="{{ site.url }}/archive/">archive</a> to read the full history.</p>
     {% endif %}
   </div><!-- /#index -->
